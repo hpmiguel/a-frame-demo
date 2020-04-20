@@ -10,7 +10,7 @@ class Lever {
 
     constructor (attrs) {
         this.onLoad = new Promise((resolve) => {
-            LeverAction.register(this.rotate);
+            LeverAction.register(this.switching);
             this._append(attrs, resolve);
         });
     }
@@ -32,19 +32,26 @@ class Lever {
 
     isActivated = () => this._entityRef.getAttribute('rotation').z === -45
 
-    rotate = () => new Promise((resolve) => {
+    _rotate = (direction) => {
         const refreshRate = 100; // segs
         const angularPrecision = 10; // displace angle interpolation
         const frames = 90 / angularPrecision; // movements to render
+        const frameDisplacement = direction === 'foreward' ? angularPrecision : -angularPrecision;
         let angleToRender = this._entityRef.getAttribute('rotation').z;
         for(let i=1; i<=frames; i++) {
             setTimeout(() => {
-                angleToRender = angleToRender - angularPrecision;
+                angleToRender = angleToRender + frameDisplacement;
                 this._entityRef.setAttribute('rotation', '0 0 ' + angleToRender);
-                if (i === frames) resolve("rotated!");
+                // if (i === frames) resolve();
             }, refreshRate * i);
         }
-    })
+    }
+
+    switching = () => {
+        console.log('activated', this.isActivated());
+        if (this.isActivated()) this._rotate('forward');
+        else this._rotate('backward');
+    }
 
 }
 

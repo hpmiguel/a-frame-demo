@@ -24,15 +24,10 @@ document.addEventListener("DOMContentLoaded", function(event) {
     });
 
     lever.onLoad.then(() => {
-        // if (!lever.isActivated()) {
-        //     lever.rotate().then(() => {
-        //         // only one movement
-        //         tile.onLoad.then(()=> {
-        //             console.log('on load tile', tile.getPosition());
-        //             tile.moveZAxis(1);
-        //         });
-        //     });
-        // }
+        // lever.switching();
+        // lever.switching.then(() => {
+        //     tile.moveZAxis(1);
+        // });
     });
 
 });
