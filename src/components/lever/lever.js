@@ -27,7 +27,7 @@ class Lever {
 
     isActivated = () => this._entityRef.getAttribute('rotation').z === -45
 
-    rotate = () => {
+    rotate = () => new Promise((resolve) => {
         const refreshRate = 100; // segs
         const angularPrecision = 10; // displace angle interpolation
         const frames = 90 / angularPrecision; // movements to render
@@ -36,9 +36,10 @@ class Lever {
             setTimeout(() => {
                 angleToRender = angleToRender - angularPrecision;
                 this._entityRef.setAttribute('rotation', '0 0 ' + angleToRender);
+                if (i === frames) resolve("rotated!");
             }, refreshRate * i);
         }
-    }
+    })
 
 }
 
