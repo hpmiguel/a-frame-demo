@@ -9,10 +9,10 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
     let tile = new Tile({
         width: 0.5,
-        height: 0.1,
+        height: 0.05,
         depth: 0.3,
         color: 'orange',
-        initPos: '-0.25 0 -4'
+        initPos: '-0.25 0.1 -4'
     });
 
     let lever = new Lever({
@@ -24,15 +24,15 @@ document.addEventListener("DOMContentLoaded", function(event) {
     });
 
     lever.onLoad.then(() => {
-        if (!lever.isActivated()) {
-            lever.rotate().then(() => {
-                // only one movement
-                tile.onLoad.then(()=> {
-                    console.log('on load tile', tile.getPosition());
-                    tile.moveZAxis(1);
-                });
-            });
-        }
+        // if (!lever.isActivated()) {
+        //     lever.rotate().then(() => {
+        //         // only one movement
+        //         tile.onLoad.then(()=> {
+        //             console.log('on load tile', tile.getPosition());
+        //             tile.moveZAxis(1);
+        //         });
+        //     });
+        // }
     });
 
 });

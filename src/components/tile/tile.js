@@ -49,7 +49,7 @@ class Tile {
         resolve("initialized!");
       },
       update: function (oldData) {
-        console.log('updated');
+        console.log('tile updated');
       }
     });
   }

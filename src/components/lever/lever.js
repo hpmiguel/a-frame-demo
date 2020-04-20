@@ -1,3 +1,4 @@
+import { LeverAction } from "./lever-action.js";
 
 class Lever {
 
@@ -9,6 +10,7 @@ class Lever {
 
     constructor (attrs) {
         this.onLoad = new Promise((resolve) => {
+            LeverAction.register(this.rotate);
             this._append(attrs, resolve);
         });
     }
@@ -21,8 +23,11 @@ class Lever {
         attrsKeys.forEach((key) => {
             this._entityRef.setAttribute(key, attrs[key]);
         });
+        this._entityRef.setAttribute(LeverAction.componentId, '');
+        this._entityRef.setAttribute('id', this._componentId);
         sceneEl.appendChild(this._entityRef);
         setTimeout(() => resolve('inserted!'), 0);
+        console.log('inserted level');
     }
 
     isActivated = () => this._entityRef.getAttribute('rotation').z === -45
